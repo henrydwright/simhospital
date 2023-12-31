@@ -1,4 +1,4 @@
-# Simulated Hospital (Henry's edition)
+# Simulated Hospital (Henry's signed edition)
 
 -   [Overview](#overview)
 -   [Basic Concepts](#basic-concepts)
