@@ -279,9 +279,9 @@ var templates = map[string]*template.Template{
 		PV1:              `PV1|1|{{.Class}}|{{template "LocationTmpl" .Location}}|28b||{{template "LocationTmpl" .PriorLocation}}|{{template "DoctorTmpl" .AttendingDoctor}}|||{{.HospitalService}}|{{template "LocationTmpl" .TemporaryLocation}}||{{.ReadmissionIndicator}}|||||{{.Type}}|{{template "CXVisitTmpl" .VisitID}}||||||||||||||||||||||{{.AccountStatus}}|{{template "LocationTmpl" .PendingLocation}}|{{template "LocationTmpl" .PriorTemporaryLocation}}|{{HL7_date .AdmissionDate}}|{{HL7_date .DischargeDate}}|`,
 	}),
 	PV2: mustParseTemplates(PV2, map[string]string{
-		locationTemplate:      locationTmpl,
-		ceAdmitReasonTemplate: ceAdmitReasonTmpl,
-		PV2:                   `PV2|{{template "LocationTmpl" .PriorPendingLocation}}||{{template "CEAdmitReasonTmpl" .AdmitReason}}|||||{{HL7_date .ExpectedAdmitDateTime}}|{{HL7_date .ExpectedDischargeDateTime}}`,
+		locationTemplate: locationTmpl,
+		ceTemplate:       ceTmpl,
+		PV2:              `PV2|{{template "LocationTmpl" .PriorPendingLocation}}||{{template "CETmpl" .AdmitReason}}|||||{{HL7_date .ExpectedAdmitDateTime}}|{{HL7_date .ExpectedDischargeDateTime}}`,
 	}),
 	NK1: mustParseTemplates(NK1, map[string]string{
 		personNameTemplate: personNameTmpl,

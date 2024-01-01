@@ -536,13 +536,15 @@ func TestBuildPV2(t *testing.T) {
 			Floor:        "Floor1",
 		},
 		AdmitReason: &ir.CodedElement{
-			Text: "Eye Problems",
+			ID:           "111516008",
+			Text:         "Blurring of visual image (finding)",
+			CodingSystem: "SCT",
 		},
 		ExpectedAdmitDateTime:     ir.NewValidTime(time.Date(2018, 4, 28, 22, 38, 44, 0, time.UTC)),
 		ExpectedDischargeDateTime: ir.NewValidTime(time.Date(2018, 4, 29, 21, 45, 30, 0, time.UTC)),
 	}
 
-	want := "PV2|RAL 12 West^Bay01^Bed10^RAL RF^^BED^RFH^Floor1||^Eye Problems|||||20180428233844|20180429224530"
+	want := "PV2|RAL 12 West^Bay01^Bed10^RAL RF^^BED^RFH^Floor1||111516008^Blurring of visual image (finding)^SCT^^|||||20180428233844|20180429224530"
 	got, err := BuildPV2(patientInfo)
 	if err != nil {
 		t.Fatalf("BuildPV2(%v) failed with %v", patientInfo, err)
