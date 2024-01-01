@@ -262,6 +262,7 @@ go_repository(
 
 go_repository(
     name = "org_golang_google_grpc",
+    build_file_proto_mode = "disable",
     importpath = "google.golang.org/grpc",
     sum = "h1:M5a8xTlYTxwMn5ZFkwhRabsygDY5G8TYLyQDBxJNAxE=",
     version = "v1.30.0",
@@ -286,4 +287,11 @@ go_repository(
     importpath = "github.com/golang/groupcache",
     sum = "h1:1r7pUrabqp18hOBcwBwiTsbnFeTZHV9eER/QT5JVZxY=",
     version = "v0.0.0-20200121045136-8c9f03a8e57e",
+)
+
+go_repository(
+    name = "org_golang_x_sys",
+    importpath = "golang.org/x/sys",
+    sum = "h1:Af8nKPmuFypiUBjVoU9V20FiaFXOcuZI21p0ycVYYGE=",
+    version = "v0.13.0",
 )
