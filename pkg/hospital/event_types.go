@@ -20,8 +20,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/pkg/errors"
-	"github.com/prometheus/client_golang/prometheus"
 	"github.com/google/simhospital/pkg/constants"
 	"github.com/google/simhospital/pkg/ir"
 	"github.com/google/simhospital/pkg/location"
@@ -29,6 +27,8 @@ import (
 	"github.com/google/simhospital/pkg/message"
 	"github.com/google/simhospital/pkg/pathway"
 	"github.com/google/simhospital/pkg/state"
+	"github.com/pkg/errors"
+	"github.com/prometheus/client_golang/prometheus"
 )
 
 const locationError = "patient location error"
@@ -67,7 +67,7 @@ func (h *Hospital) processAdmission(e *state.Event, logLocal *logging.SimulatedH
 		patientInfo.AddEncounter(patientInfo.AdmissionDate, constants.EncounterStatusArrived, patientInfo.Location)
 	}
 
-	patientInfo.AdmitReason = e.Step.Admission.AdmitReason
+	patientInfo.AdmitReason = &ir.CodedElement{Text: e.Step.Admission.AdmitReason}
 	patientInfo.PendingLocation = nil
 	patientInfo.ExpectedAdmitDateTime = ir.NewInvalidTime()
 	patientInfo.Class = h.messageConfig.PatientClass.Inpatient

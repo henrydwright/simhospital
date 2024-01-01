@@ -535,7 +535,9 @@ func TestBuildPV2(t *testing.T) {
 			Building:     "RFH",
 			Floor:        "Floor1",
 		},
-		AdmitReason:               "Eye Problems",
+		AdmitReason: &ir.CodedElement{
+			Text: "Eye Problems",
+		},
 		ExpectedAdmitDateTime:     ir.NewValidTime(time.Date(2018, 4, 28, 22, 38, 44, 0, time.UTC)),
 		ExpectedDischargeDateTime: ir.NewValidTime(time.Date(2018, 4, 29, 21, 45, 30, 0, time.UTC)),
 	}
@@ -3389,7 +3391,9 @@ func testPatientInfo() *ir.PatientInfo {
 		Allergies:                 []*ir.Allergy{al},
 		Diagnoses:                 []*ir.DiagnosisOrProcedure{testDiagnosis()},
 		Procedures:                []*ir.DiagnosisOrProcedure{testProcedure()},
-		AdmitReason:               "Eye problems",
+		AdmitReason: &ir.CodedElement{
+			Text: "Eye problems",
+		},
 	}
 	return patientInfo
 }

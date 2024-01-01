@@ -21,11 +21,11 @@ import (
 	"text/template"
 	"time"
 
-	"github.com/pkg/errors"
 	"github.com/google/simhospital/pkg/constants"
 	"github.com/google/simhospital/pkg/hl7"
 	"github.com/google/simhospital/pkg/ir"
 	"github.com/google/simhospital/pkg/logging"
+	"github.com/pkg/errors"
 )
 
 // The fields in this block are HL7 message types Simulated Hospital supports.
@@ -214,7 +214,7 @@ var (
 	// When the OBX.Observation Identifier field is used to send Notes, this is the Document Type; e.g. ECG/Discharge Summary.
 	ceNoteTmpl = "{{.DocumentType}}^{{.DocumentType}}"
 	// ceAdmitReasonTmpl is CE template for Admit Reason in PV2.3 field.
-	ceAdmitReasonTmpl = "^{{.}}"
+	ceAdmitReasonTmpl = "^{{escape_HL7 .Text}}"
 
 	// primFacTmpl represents the data type XON: Extended Composite Name And Identification Number For Organizations
 	// http://hl7-definition.caristix.com:9010/HL7%20v2.3.1/segment/PD1?version=HL7%20v2.3.1&dataType=XON
@@ -866,7 +866,7 @@ func BuildUpdatePatientADTA08(h *HeaderInfo, p *ir.PatientInfo, includeFullPV1 b
 		return nil, errors.Wrap(err, "cannot build PID segment")
 	}
 	segments = append(segments, pid)
-	if (includeFullPV1) {
+	if includeFullPV1 {
 		pv1, err := BuildPV1(p)
 		if err != nil {
 			return nil, errors.Wrap(err, "cannot build PV1 segment")
